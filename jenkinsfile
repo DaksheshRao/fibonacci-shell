@@ -4,7 +4,7 @@ pipeline {
     stage('Build Docker image') {
       steps {
         script {
-          def dockerImage = docker.build("${params.dockerhub-tag}", "-f Dockerfile .")
+          def dockerImage = docker.build("${params.dockerhub-tag}:${params.tag}", "-f Dockerfile .")
         }
       }
     }
@@ -12,7 +12,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh') {
-            docker.image('${params.dockerhub-tag}').push()
+            docker.image('${params.dockerhub-tag}:${params.tag}').push()
           }
         }
       }
@@ -20,7 +20,7 @@ pipeline {
     stage('Build and push image on harbor') {
       steps {
         script{
-          def dockerImage = docker.build("${params.harbor-tag}", "-f Dockerfile .")
+          def dockerImage = docker.build("${params.harbor-tag}:${params.tag}", "-f Dockerfile .")
           docker.withRegistry('https://harbor.cubastion.net', 'harbor_sre'){
           dockerImage.push()
          } 
