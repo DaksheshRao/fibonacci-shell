@@ -1,8 +1,9 @@
 pipeline {
   agent any
-
-  parameters {
-    string(name: 'imageName', defaultValue: 'daksheshrao/fibonacci', description: 'Docker image name') string(name: 'imagetag', defaultValue: '2.0', description: 'Docker image tag')
+  
+    parameters {
+        string(name: 'imageName', defaultValue: 'daksheshrao/fibonacci', description: 'The name of the Docker image')
+        string(name: 'imageTag', defaultValue: '4.0', description: 'The tag for the Docker image')
     }
   stages {
     stage('Build Docker image') {
