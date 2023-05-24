@@ -3,9 +3,8 @@ pipeline {
   stages {
     stage('Build Docker image') {
       steps {
-        script {
-          // Define the variable outside the script block
           def builtImage
+       script {
           builtImage = docker.build("fibonnaci:3.0", "-f Dockerfile .")
         }
       }
