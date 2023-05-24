@@ -12,7 +12,8 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh') 
-	  {
+	  }
+	script {
            dockerImage.push("dakshesh/fibonacci")
 	  }
         }
