@@ -2,16 +2,13 @@ pipeline{
 	agent any
 	stages
 	{
-		stage('build')
+		stage('Build docker image')
 		{
 			steps{
-			echo "build stage is working...."
-			}
-		}
-		stage('test')
-		{
-			steps{
-			echo "test stage is working"
+			script {
+          			withDockerRegistry([credentialsId: 'dockerhub-credentials', url: 'https://index.docker.io/v1/']) {
+            			docker.build("your-image-name:tag", "-f Dockerfile .")
+          		}		
 			}
 		}
 	}
