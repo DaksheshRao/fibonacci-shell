@@ -9,7 +9,7 @@ pipeline {
     stage('Build Docker image') {
       steps {
         script {
-          def dockerImage = docker.build('daksheshrao/fibonacci:4.0', "-f Dockerfile .")
+          def dockerImage = docker.build('daksheshrao/fibonacci:3.0', "-f Dockerfile .")
         }
       }
     }
@@ -18,7 +18,7 @@ pipeline {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh')
 	  {
-            docker.image(daksheshrao/fibonacci:4.0).push()
+            docker.image('daksheshrao/fibonacci:3.0').push()
           }
         }
       }
