@@ -16,7 +16,6 @@ pipeline {
 	script {
            dockerImage.push("dakshesh/fibonacci")
 	  }
-        }
       }
     }
   }
