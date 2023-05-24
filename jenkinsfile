@@ -1,20 +1,19 @@
 pipeline {
-  agent any
+  agent any
   stages {
     stage('Build Docker image') {
       steps {
         script {
-            def builtImage = docker.build("fibonacci:1.1", "-f Dockerfile .")
+          def builtImage = docker.build("fibonacci:1.1", "-f Dockerfile .")
         }
       }
     }
     stage('Push to Docker Hub') {
       steps {
         script {
-       docker.withRegistry('https://registry.hub.docker.com', 'daksheshrao')
-       {
-         builtImage.push("daksheshrao/fibonacci:1.1")
-       }
+          docker.withRegistry('https://registry.hub.docker.com', 'daksheshrao') {
+            builtImage.push()
+          }
         }
       }
     }
