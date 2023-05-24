@@ -17,9 +17,9 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh')
-	  def imageName = "${params.dockerhub_tag}:${params.tag}"
+	  def imageName = "imageName:imageTag"
 	  {
-            docker.image(imageName).push()
+            docker.image(imageName:imageTag).push()
           }
         }
       }
