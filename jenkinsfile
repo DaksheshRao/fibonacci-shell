@@ -11,8 +11,10 @@ pipeline {
     stage('Push to Docker Hub') {
       steps {
         script {
-          docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh') {
-          builtImage.push('daksheshrao/fibonacci:1.1')
+          docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh') 
+	  docker.tag('fibonacci:1.1', 'daksheshrao/fibonacci:1.1')
+	  {
+            builtImage.push()
           }
         }
       }
