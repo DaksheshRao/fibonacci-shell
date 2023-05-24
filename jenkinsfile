@@ -1,6 +1,7 @@
 pipeline {
   agent any
-  parameter {
+
+  parameters {
     string(name: 'imageName', defaultValue: 'daksheshrao/fibonacci', description: 'Docker image name') string(name: 'imagetag', defaultValue: '2.0', description: 'Docker image tag')
     }
   stages {
