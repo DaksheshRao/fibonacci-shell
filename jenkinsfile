@@ -4,7 +4,8 @@ pipeline {
     stage('Build Docker image') {
       steps {
         script {
-          def dockerImage = docker.build('${params.dockerhub-tag}:${params.tag}', "-f Dockerfile .")
+          def imageName = "${params.dockerhub_tag}:${params.tag}"
+          def dockerImage = docker.build(imageName, "-f Dockerfile .")
         }
       }
     }
