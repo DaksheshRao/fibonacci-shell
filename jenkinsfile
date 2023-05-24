@@ -13,7 +13,7 @@ pipeline {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh') 
 	  {
-           dockerImage.push("dakshesh/fibonacci")
+           docker.Image('fibonacci:1.1').push("daksheshrao/fibonacci")
 	  }
         }
       }
