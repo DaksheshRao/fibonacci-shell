@@ -5,7 +5,6 @@ pipeline {
       steps {
         script {
          def dockerImage = docker.build("fibonnaci:1.1", "-f Dockerfile .")
-	 dockerImage.tag("daksheshrao/fibonacci:1.1")
         }
       }
     }
@@ -13,9 +12,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh') 
-	  docker.tag('fibonacci:1.1', 'daksheshrao/fibonacci:1.1')
-	  def dockerImage = docker.image("daksheshrao/fibonacci:1.1")
-          dockerImage.push()
+          dockerImage.push("dakshesh/fibonacci")
         }
       }
     }
