@@ -1,21 +1,24 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build Docker image') {
-      steps {
-        script {
-          def builtImage = docker.build("fibonacci:1.1", "-f Dockerfile .")
-        }
-      }
-    }
-    stage('Push to Docker Hub') {
-      steps {
-        script {
-          docker.withRegistry('https://registry.hub.docker.com', 'daksheshrao') {
-            builtImage.push()
-          }
-        }
-      }
-    }
-  }
+  agent any
+  stages {
+    stage('Build Docker image') {
+      steps {
+        script {
+          // Define the variable outside the script block
+          def builtImage
+          builtImage = docker.build("fibonnaci:3.0", "-f Dockerfile .")
+        }
+      }
+    }
+    stage('Push to Docker Hub') {
+      steps {
+        script {
+          docker.withRegistry('https://registry.hub.docker.com', '2d02e149-2bd5-4d73-a88c-83bdf82fe084') {
+            // Access the builtImage variable
+            builtImage.push()
+          }
+        }
+      }
+    }
+  }
 }
