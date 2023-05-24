@@ -12,10 +12,11 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh') 
-          dockerImage.push("dakshesh/fibonacci")
+	  {
+           dockerImage.push("dakshesh/fibonacci")
+	  }
         }
       }
     }
   }
 }
-
