@@ -17,6 +17,10 @@ pipeline {
 	  }
         }
       }
+    stage('cleanup'){
+      steps{
+	cleanws()
+      }
     }
   }
 }
