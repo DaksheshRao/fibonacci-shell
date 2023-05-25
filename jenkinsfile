@@ -19,7 +19,7 @@ pipeline {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh')
 	  {
-            docker.image(${params.docker_imageName}:${params.tag}).push()
+            docker.image("${params.docker_imageName}:${params.tag}").push()
           }
         }
       }
