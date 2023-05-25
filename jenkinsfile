@@ -2,14 +2,15 @@ pipeline {
   agent any
   
     parameters {
-        string(name: 'imageName', defaultValue: 'daksheshrao/fibonacci', description: 'The name of the Docker image')
-        string(name: 'imageTag', defaultValue: '4.0', description: 'The tag for the Docker image')
+        string(name: 'docker_imageName', defaultValue: 'daksheshrao/fibonacci', description: 'The name of the Docker image')
+        string(name: 'tag', defaultValue: '4.0', description: 'The tag for the Docker image')
+        string(name: 'harbor_imageName', defaultValue: '4.0', description: 'The tag for the Docker image')
     }
   stages {
     stage('Build Docker image') {
       steps {
         script {
-          def dockerImage = docker.build('daksheshrao/fibonacci:3.0', "-f Dockerfile .")
+          def dockerImage = docker.build("${params.docker_imageName}:${params.tag}", "-f Dockerfile .")
         }
       }
     }
@@ -18,7 +19,7 @@ pipeline {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker-dakshesh')
 	  {
-            docker.image('daksheshrao/fibonacci:3.0').push()
+            docker.image(${params.docker_imageName}:${params.tag}).push()
           }
         }
       }
@@ -26,7 +27,7 @@ pipeline {
     stage('Build and push image on harbor') {
       steps {
         script{
-          def dockerImage = docker.build("sre-training/daksheshrao-fibonacci:4.0", "-f Dockerfile .")
+          def dockerImage = docker.build("${params.harbor_imageName}:${params.tag}", "-f Dockerfile .")
           docker.withRegistry('https://harbor.cubastion.net', 'harbor_sre'){
           dockerImage.push()
          } 
